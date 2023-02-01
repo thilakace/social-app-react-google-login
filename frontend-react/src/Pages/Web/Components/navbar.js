@@ -58,10 +58,10 @@ function NavBarHeader() {
     {
       slug : "/all-post",
       label: "All Posts",
-      enable : (localStorage.getItem('userId') === '1') ? true : false
+      enable : (localStorage.getItem('userId') === '3') ? true : false
     },
     {
-      slug : "/post_qustion_an_answer",
+      slug : "/create-new-post",
       label: "Create Post",
       enable : true
     }
