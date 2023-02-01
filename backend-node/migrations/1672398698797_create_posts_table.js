@@ -1,0 +1,4 @@
+module.exports = {
+    "up": "CREATE TABLE `posts` (`id` int(11) NOT NULL, `question` varchar(200) NOT NULL, `answer` longtext DEFAULT NULL, `tags` text DEFAULT NULL, `link` varchar(255) NOT NULL, `member_code` varchar(255) DEFAULT NULL, `status` int(11) NOT NULL DEFAULT 0, `view_count` int(11) NOT NULL DEFAULT 0, `like_count` int(11) NOT NULL DEFAULT 0, `dislike_count` int(11) NOT NULL DEFAULT 0, `share_count` int(11) NOT NULL DEFAULT 0, `created_at` datetime NOT NULL DEFAULT current_timestamp(), `updated_at` datetime NOT NULL DEFAULT current_timestamp(), `created_by` int(11) DEFAULT NULL, `author_name` varchar(200) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;",
+    "down": "DROP TABLE posts"
+}
