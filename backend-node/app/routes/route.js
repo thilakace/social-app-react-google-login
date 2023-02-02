@@ -78,7 +78,7 @@ router.post('/api/posts_like_share/', cors(), PostsController.PostLikeShare);
 router.get('/api/posts-edit/:id/:module',  verifyToken, PostsController.getEditpost);
 router.post('/api/posts-update/:id/:module', verifyToken, PostsController.updatePost); // new post
 router.post('/api/posts/:module', verifyToken, PostsController.createNewPosts); // new post
-router.get('/api/get-author-posts/:userId/:module',  PostsController.getAuthorsPostData);
+router.get('/api/get-author-posts/:userId/:module/:prupose',  PostsController.getAuthorsPostData);
 router.post('/api/get-publish-posts/:module',  PostsController.getPublishPost);
 router.get('/api/check-user', verifyToken, UserController.getUserInfo); // new post
 

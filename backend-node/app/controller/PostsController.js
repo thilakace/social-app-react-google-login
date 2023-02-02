@@ -26,7 +26,8 @@ const createNewPosts = async (req, res, next) => {
         return res.send({status:'success', message:"Module "+req.params.module+" not found",code :0});
       } 
       req.body.module =   getModuleId[0].id;
-      req.body.author_name = 'user';
+      var getUserName = await Posts.getCommonQuery("select id,name from users where id='"+req.body.created_by+"'");
+      req.body.author_name = getUserName[0].name;
       const posts = await Posts.create(req.body);
      // console.log(posts);
      if(posts.affectedRows ==1){
@@ -108,8 +109,13 @@ const getSingleData = async (req, res, next) => {
 
 const getAuthorsPostData = async (req, res, next) => {
   try { 
-
-    const posts = await Posts.getFilterList(req.params.module, req.params.userId);
+    var posts = [];
+    if(req.params.prupose == 'all'){
+       posts = await Posts.getAllList(req.params.module, req.params.userId);
+    }else{
+       posts = await Posts.getFilterList(req.params.module, req.params.userId);
+    }
+    
       res.send({status:'success','message':'Data retrive successfully',data:posts,code:1})
   } catch (error) {
      return res.status(401).send(error);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Table } from "react-bootstrap";
+import { Button, Card, Col, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Apiservice } from "../Services/Apiservice";
 
@@ -10,6 +10,12 @@ const app_name = process.env.REACT_APP_NAME;
 const DataTable = (property) => {
     const [mypostdata, setMypostdata] = useState([]);
     const [ publish, setPublish] = useState('none');
+    const [searchValue, setSearchvalue] = React.useState("");
+
+    const onChangeHandler = event => {
+      setSearchvalue(event.target.value);
+      
+   };
     const getPostStatus = (props,status) => {
       
       props.newstatus= status;
@@ -33,7 +39,7 @@ const DataTable = (property) => {
     }
 
     const refreshData = () => {
-      Apiservice("get-author-posts/"+localStorage.getItem('userId')+"/questions",'GET').then((data) => {
+      Apiservice("get-author-posts/"+localStorage.getItem('userId')+"/"+app_module+"/"+property.items,'GET').then((data) => {
         setMypostdata(data.data);
       });
     }
@@ -53,31 +59,42 @@ const DataTable = (property) => {
         <Card>
         <Card.Header as="h5">{property.title}</Card.Header>
         <Card.Body>
+        <Card.Title>
+
+        <Row>
+               <Col>
+               <input
+              type="text"
+              name="name"
+              onChange={onChangeHandler}
+              value={searchValue}
+              placeholder="Search by title"
+            />
+               </Col>
+               <Col>
+               
+               </Col>
+            </Row>
+        </Card.Title>
         <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                     <th>#</th>
                     <th>Title</th>
                     <th>updated at</th>
-                    <th>Like </th>
-                    <th>Share </th>
-                    <th>View </th>
-                    <th>Dis like </th>
+                    <th>Author</th>
                     <th>Status </th>
                     <th>Action </th>
                     </tr>
                 </thead>
                 <tbody>
                 {
-                  mypostdata.map(post =>
+                  mypostdata.filter(name => name.question.includes(searchValue)).map(post =>
                     <tr key={post.id}>
                      <td>{post.id}</td>
                     <td>{post.question}</td>
                     <td>{post.updated_at}</td>
-                    <td>{post.like_count}</td>
-                    <td>{post.share_count}</td>
-                    <td>{post.view_count}</td>
-                    <td>{post.dislike_count}</td>
+                    <td>{post.author_name}</td>
                     <td>{(post.status === 1) ? 'Active' : 'inactive' }</td>
                     <td>
                     <Button style={{display:publish}} variant="primary" size="sm" onClick={() => getPostStatus(post,(post.status === 1) ? 'Disable' : 'Publish')}>

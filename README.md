@@ -17,3 +17,6 @@
 ## Live demo
 
 [Demo](https://social.nearmedealers.com/) 
+
+* use simple login button to login or signup.
+* Demo username : admin@gmail.com   | password : admin2023

@@ -69,6 +69,22 @@ const getFilterList = (module, userId, res) => {
   });
 }
 
+const getAllList = (module, userId, res) => {
+   
+  let sqlQuery = "SELECT id,question,link,status,view_count,like_count,dislike_count,share_count,created_at,updated_at,created_by,author_name, DATE_FORMAT(updated_at, '%M,%d %Y %H:%i:%s') AS updated_at FROM posts order by updated_at DESC";
+
+  return new Promise((resolve, reject) => {
+    con.query(sqlQuery, [userId,2], (err, result) => {
+      if (err) {
+        reject(err);
+      }
+      else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 const update = (sqlQuery, req, moduleId) => {
  
   return new Promise((resolve, reject) => {
@@ -119,4 +135,4 @@ const setLikes = (userReq, callback) => {
 
 
 
-module.exports = {create, getList, findOne, update, getFilterList, getCommonQuery, setLikes};
+module.exports = {create, getList, findOne, update, getFilterList, getCommonQuery, setLikes, getAllList};
