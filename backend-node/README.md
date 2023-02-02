@@ -10,7 +10,7 @@
 
 ## Installation steps
 
-[Created repo in github](https://github.com/thilakace/node-js-mysql-basic) 
+
 
 $ npm install dotenv --save  [Reference](https://www.npmjs.com/package/dotenv)
 
