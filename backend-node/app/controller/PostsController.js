@@ -26,6 +26,7 @@ const createNewPosts = async (req, res, next) => {
         return res.send({status:'success', message:"Module "+req.params.module+" not found",code :0});
       } 
       req.body.module =   getModuleId[0].id;
+      req.body.author_name = 'user';
       const posts = await Posts.create(req.body);
      // console.log(posts);
      if(posts.affectedRows ==1){
