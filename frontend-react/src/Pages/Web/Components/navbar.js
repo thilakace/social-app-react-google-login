@@ -73,7 +73,7 @@ function NavBarHeader() {
     <>
     <Navbar collapseOnSelect expand="lg"  className="nav-color" sticky="top" >
       <Container >
-      <LinkContainer to={"/"}>
+      <LinkContainer to={"/home"}>
          <Navbar.Brand > <h3 style={{color: "#FFF"}}>{app_name}</h3></Navbar.Brand>
       </LinkContainer>
       

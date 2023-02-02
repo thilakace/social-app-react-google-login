@@ -71,10 +71,10 @@ const getFilterList = (module, userId, res) => {
 
 const getAllList = (module, userId, res) => {
    
-  let sqlQuery = "SELECT id,question,link,status,view_count,like_count,dislike_count,share_count,created_at,updated_at,created_by,author_name, DATE_FORMAT(updated_at, '%M,%d %Y %H:%i:%s') AS updated_at FROM posts order by updated_at DESC";
+  let sqlQuery = "SELECT id,question,link,status,view_count,like_count,dislike_count,share_count,created_at,updated_at,created_by,author_name, DATE_FORMAT(updated_at, '%M,%d %Y %H:%i:%s') AS updated_at FROM posts where c status!=? order by updated_at DESC";
 
   return new Promise((resolve, reject) => {
-    con.query(sqlQuery, [userId,2], (err, result) => {
+    con.query(sqlQuery, [2], (err, result) => {
       if (err) {
         reject(err);
       }
